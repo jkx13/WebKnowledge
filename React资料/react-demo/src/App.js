@@ -48,6 +48,7 @@ export default function App() {
                         <Radio.Button value="small">Small</Radio.Button>
                         <Radio.Button value="default">Default</Radio.Button>
                         <Radio.Button value="large">Large</Radio.Button>
+                        <Radio.Button value="largs1">lays21</Radio.Button>
                     </Radio.Group>
                 </Form.Item>
                 <Form.Item label="Input">
