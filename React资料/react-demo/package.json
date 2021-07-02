@@ -4,10 +4,12 @@
   "description": "A simple example deployed using react-codesandboxer",
   "main": "index.js",
   "dependencies": {
-    "react-router-dom": "latest",
-    "react-scripts": "2.0.0",
+    "@ant-design/icons": "^4.6.2",
+    "antd": "^4.16.6",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-router-dom": "latest",
+    "react-scripts": "^4.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
