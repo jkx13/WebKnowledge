@@ -1,111 +1,70 @@
 import React, { useState } from 'react';
 import 'antd/dist/antd.css';
 import './index.css';
-import {
-    Form,
-    Input,
-    Button,
-    Radio,
-    Select,
-    Cascader,
-    DatePicker,
-    InputNumber,
-    TreeSelect,
-    Switch,
-} from 'antd';
+import { Layout, Menu, Breadcrumb } from 'antd';
+import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+
+const { SubMenu } = Menu;
+const { Header, Content, Sider } = Layout;
 export default function App() {
-
-    const [componentSize, setComponentSize] = useState('default');
-
-    const onFormLayoutChange = ({ size }) => {
-        setComponentSize(size);
-    };
-
-    const onFinish = (values) => {
-        console.log('GET==' + JSON.stringify(values));
-    }
-
     return (
-        <div className="app-box">
+        <Layout>
+            <Header className="header">
+                <div className="logo" />
+                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
+                    <Menu.Item key="1">nav 1</Menu.Item>
+                    <Menu.Item key="2">nav 2</Menu.Item>
+                    <Menu.Item key="3">nav 3</Menu.Item>
+                </Menu>
+            </Header>
+            <Layout>
+                <Sider width={200} className="site-layout-background">
+                    <Menu
+                        mode="inline"
+                        defaultSelectedKeys={['1']}
+                        defaultOpenKeys={['sub1']}
+                        style={{ height: '100%', borderRight: 0 }}
+                    >
+                        <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
+                            <Menu.Item key="1">option1</Menu.Item>
+                            <Menu.Item key="2">option2</Menu.Item>
+                            <Menu.Item key="3">option3</Menu.Item>
+                            <Menu.Item key="4">option4</Menu.Item>
+                        </SubMenu>
+                        <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
+                            <Menu.Item key="5">option5</Menu.Item>
+                            <Menu.Item key="6">option6</Menu.Item>
+                            <Menu.Item key="7">option7</Menu.Item>
+                            <Menu.Item key="8">option8</Menu.Item>
+                        </SubMenu>
+                        <SubMenu key="sub3" icon={<NotificationOutlined />} title="subnav 3">
+                            <Menu.Item key="9">option9</Menu.Item>
+                            <Menu.Item key="10">option10</Menu.Item>
+                            <Menu.Item key="11">option11</Menu.Item>
+                            <Menu.Item key="12">option12</Menu.Item>
+                        </SubMenu>
 
-            <Form
-                labelCol={{
-                    span: 4,
-                }}
-                wrapperCol={{
-                    span: 14,
-                }}
-                layout="horizontal"
-                initialValues={{
-                    size: componentSize,
-                }}
-                onValuesChange={onFormLayoutChange}
-                size={componentSize}
-                onFinish={onFinish}
-            >
-                <Form.Item label="Form Size" name="size">
-                    <Radio.Group>
-                        <Radio.Button value="small">Small</Radio.Button>
-                        <Radio.Button value="default">Default</Radio.Button>
-                        <Radio.Button value="large">Large</Radio.Button>
-                        <Radio.Button value="largs1">lays21</Radio.Button>
-                    </Radio.Group>
-                </Form.Item>
-                <Form.Item label="Input">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Select">
-                    <Select>
-                        <Select.Option value="demo">Demo</Select.Option>
-                    </Select>
-                </Form.Item>
-                <Form.Item label="TreeSelect">
-                    <TreeSelect
-                        treeData={[
-                            {
-                                title: 'Light',
-                                value: 'light',
-                                children: [
-                                    {
-                                        title: 'Bamboo',
-                                        value: 'bamboo',
-                                    },
-                                ],
-                            },
-                        ]}
-                    />
-                </Form.Item>
-                <Form.Item label="Cascader">
-                    <Cascader
-                        options={[
-                            {
-                                value: 'zhejiang',
-                                label: 'Zhejiang',
-                                children: [
-                                    {
-                                        value: 'hangzhou',
-                                        label: 'Hangzhou',
-                                    },
-                                ],
-                            },
-                        ]}
-                    />
-                </Form.Item>
-                <Form.Item label="DatePicker">
-                    <DatePicker />
-                </Form.Item>
-                <Form.Item label="InputNumber">
-                    <InputNumber />
-                </Form.Item>
-                <Form.Item label="Switch">
-                    <Switch />
-                </Form.Item>
-                <Form.Item label="Button">
-                    <Button>Button</Button>
-                </Form.Item>
-            </Form>
-
-        </div>
+                    </Menu>
+                </Sider>
+                <Layout style={{ padding: '0 24px 24px' }}>
+                    <Breadcrumb style={{ margin: '16px 0' }}>
+                        <Breadcrumb.Item>Home</Breadcrumb.Item>
+                        <Breadcrumb.Item>List</Breadcrumb.Item>
+                        <Breadcrumb.Item>App</Breadcrumb.Item>
+                    </Breadcrumb>
+                    <Content
+                        className="site-layout-background"
+                        style={{
+                            padding: 20,
+                            margin: 0,
+                            minHeight: "100vh",
+                        }}
+                    >
+                        Content
+                    </Content>
+                </Layout>
+            </Layout>
+        </Layout>
     )
 
 }
