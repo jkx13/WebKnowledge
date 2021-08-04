@@ -1,8 +1,23 @@
 ####  安装docker
+[docker官网](https://www.docker.com)
 [docker文档](https://docs.docker.com/engine/install/centos/)
+[docker发布](https://hub.docker.com)
 
 #### 镜像阿里云地址
 [阿里云](https://developer.aliyun.com/article/110806)
+
+#### 启动docker
+```
+service docker start
+
+//设置docker自启
+systemctl enable docker
+```
+
+#### 查看docker运行
+```
+docker version
+```
 
 #### 创建容器：(可以使用systemctl启动服务)
 ```
@@ -20,3 +35,194 @@ docker commit 容器ID <name>:<tag>
 ```
 
 docker run -d --name <name> --privileged=true -p 80:80 -p8080:8080 <name:tag> /usr/sbin/init
+
+#### 容器退出
+```
+//容器退出
+exit
+//容器不停止退出
+Ctrl+P+Q
+```
+
+#### 查看容器元数据
+```
+docker inspect 容器ID
+```
+
+#### 查看容器日志
+```
+docker logs -t -f 容器ID
+```
+
+#### 查看容器运行
+```
+docker ps
+
+//查看运行的过的容器(-q只显示容器ID)
+docker ps -a
+```
+
+#### 搜索容器
+```
+docker search 名称 --filter=STARS=3000
+```
+
+#### 拉取容器
+```
+docker pull mysql:5.7
+```
+
+#### 删除容器
+```
+docker rmi -f 容器ID
+```
+
+#### 运行容器
+```
+docker run -it(命令交互输入) centos /bin/bash
+```
+
+#### 启动容器
+```
+docker start 容器ID
+```
+
+#### 停止容器
+```
+docker stop 容器ID
+
+```
+
+#### 后台运行容器（如果没有运行程序会自动停止容器)
+```
+docker run -d 容器ID
+
+docker run -d --name 设置当前名称 -p 8080:80 nginx
+
+curl localhost:8080 //查看是否可请求到
+
+docker run -it --rm tomcat:9.0(用完即删，用于测试)
+
+docker run -d -p 8088:8080 --name tomcat11 tomcat
+
+//-e配置环境信息
+docker run -d --name elasticsearch -p 9200:9200 -p9300:9300 -e "discovery.types=single-node" -e ES_JAVA_OPTS="-Xms64m -Xmx512m" elasticsearch:7.6.2
+docker run -d --name elasticsearch -p 9200:9200 -p9300:9300 -e "discovery.types=single-node" elasticsearch:7.6.2
+```
+
+#### 进入容器
+```
+ps -ef查看运行终端
+
+//开启新终端
+docker exec -it 容器ID /bin/bash 
+
+//使用当前执行的终端
+docker attach 容器ID
+```
+
+#### 从容器中拷贝文件
+```
+docker cp 容器ID:/home/test.java /home
+```
+
+#### 容器看内存性能
+```
+docker stats
+```
+
+#### 容器可视化
+```
+//-v挂载
+//portainer
+docker run -d -p8080:9000 --restart=always -v /var/run/docker.sock/:/var/run/docker.sock --privileged=true portainer/portainer
+
+//Rancher(CI/CD)持续集成
+```
+
+#### 提交
+```
+docker commit -m="提交信息" -a="作者名称" 容器ID 新名称:Tag
+```
+
+#### 卷(数据持续化 相互数据该改变)
+```
+docker run -it -v 主机目录:容器目录 （-v 主机目录:容器目录） 容器ID /bin/bash
+
+//查看所有卷的情况
+docker volume ls
+//local     17f1a5a8e721658975151ef9a9c7b44f7fbdc33423f4840360ae8f4a55fe4808
+//为匿名卷 -v只写容器内的路径，没有容器外的路径
+
+//具名 -v写名称:容器内部路径
+
+//查看工作本机卷路径
+docker volume inspect 具名或匿名路径
+
+//-v 容器路径:ro或rw
+
+ro:readonly只读（容器内部无法操作)
+rw:readwrite 可读性可写
+```
+
+#### 配置mysql的卷
+```
+docker run -d -p 3310:3306 -v /home/mysql/conf:/etc/mysql/conf.d -v /home/mysql/data:/var/lib/mysql -e MY_SQL_ROOT_PASSWORD=123456 --name mysql01 mysql:5.7
+```
+
+#### Docker file 文件
+```
+dockerfile文件内容:
+FROM centos
+
+VOLUME ["jkx01","jkx02"]
+
+CMD echo "-------end-------"
+
+CMD /bin/bash
+
+
+//构建镜像
+docker build -f /root/dockerfile -t jkx/centos:1.0 .
+//运行
+docker run -it --name centos01 jkx/centos:1.0
+//--volumes-from实现同步共享至centos01（只要其中一个容器删除，共享文件还在）
+docker run -it --name centos02 --volumes-from centos01 jkx/centos:1.0
+
+//发布镜像
+docker push 
+
+```
+
+#### DockerFile构建过程
+```
+1.关键字命令大写
+2.执行至上而下
+3.注释#
+4.每一行命令是一层镜像
+
+Dockerimage:使用dockerfile构建的镜像
+
+Docker容器:是镜像运行起来的容器
+
+FROM 基于那个基础镜像构建容器
+RUN	执行类似Linux命令行 容器构建时需要运行的命令
+ADD 拷贝本机文件或远程文件到镜像
+COPY 拷贝本机文件到镜像
+USER 指定容器启动的用户
+ENTRYPOINT 容器启动时的命令 可以追加
+CMD 同上容器启动时运行的命令 多个CMD只会最后一个生效 会被docker run 之后的参数替换
+
+ONBUILD 构建一个被继承的Dockerfile运行命令，父镜像被子镜像继承时父镜像的onbuild触发
+VOLUME 容器数据卷，数据持久化
+ENV 用来构建镜像过程中设置的环境变量
+
+WORKDIR 启动容器后默认进入的工作目录
+EXPOSE 该容器默认暴露出来的端口
+
+MAINTAINER 镜像维护者
+
+
+
+
+```
