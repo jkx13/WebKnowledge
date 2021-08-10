@@ -184,6 +184,7 @@ CMD /bin/bash
 
 //构建镜像
 docker build -f /root/dockerfile -t jkx/centos:1.0 .
+//docker build -f DockerFile -t 名称:Tag .（当前）
 //运行
 docker run -it --name centos01 jkx/centos:1.0
 //--volumes-from实现同步共享至centos01（只要其中一个容器删除，共享文件还在）
@@ -223,6 +224,144 @@ EXPOSE 该容器默认暴露出来的端口
 MAINTAINER 镜像维护者
 
 
+dockerfile-----------
+
+FROM centos
+MAINTAINER jkx13
+
+ENV MYPATH /usr/local
+WORKDIR $MYPATH
+
+RUN yum -y install vim
+RUN yum -y install net-tools
+
+EXPOSE 80
+
+CMD ["ls","-a"]
+CMD echo $MYPATH
+CMD echo "-----end------"
+CMD /bin/bash
+
+//如果名称为： DockerFile 可直接运行: docker build -t 名称:tag 
+
+```
+
+#### docker容器构建过程查看
+```
+docker history 容器ID
+```
+
+#### 发布镜像
+```
+1.注册 hub.docker.com
+
+docker login //登录
+
+docker push 名字/repository:Tag //提交至docker
+
+//修改新增tag镜像
+docker tag 容器ID repository:tag
+```
+
+#### 删除所有镜像
+```
+docker rm -f $(docker ps -aq)
+```
+
+```DockerFile
+
+FROM centos
+MAINTAINER jkx
+
+COPY README.txt /usr/local/README.txt
+
+ADD jdk-8ull-linux-x64.tar.gz /usr/local/
+ADD apache-tomcat-9.0.22.tar.gz /usr/local/
+
+RUN yum -y install vim
+
+ENV MYPATH /usr/local
+WORKDIR $MYPATH
+
+ENV JAVA_HOME /usr/local/jdk1.8.0_11
+ENV CLASSPATH $JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+ENV CATELINA_HOME /usr/local/apache-tomcat-9.0.22
+ENV CATELINA_BASE /usr/local/apache-tomcat-9.0.22
+ENV PATH $PATH:$JAVA_HOME/bin:$CATELINA_HOME/lib:$CATELINA_HOME/bin
+
+EXPOSE 8080
+
+CMD /usr/local/apache-tomcat-9.0.22/bin/startup.sh && tail -F /usr/local/apache-tomcat-9.0.22/bin/logs/catelina.out
+
+```
+
+#### Docker网络
+```
+ip addr 发现容器网络地址
+
+docker exec -it 容器repository ip addr(命令)
+
+//设置网络链接 --link
+docker run -d -P --name tomcat03 --link tomcat01 tomcat:9.0
+
+docker exec -it tomcat03 ping tomcat01
+
+docker exec -it tomcat03 cat /etc/hosts
+
+//查看docker 网络
+docker network ls
+
+docker network inspect 802ba5e14bd8
+
+//docker0:默认域名不能直接访问
+docker run -d -P --name tomcat01 --net bridge tomcat:9.0
+
+```
+
+#### 自定义网络
+```
+docker network create --driver bridge --subnet 192.168.0.0/16 --gateway 192.168.0.1 mynet
+
+docker network inspect mynet
+
+docker run -d -P --name tomcat-net01 --net mynet tomcat:9.0
+docker run -d -P --name tomcat-net02 --net mynet tomcat:9.0
+docker exec -it tomcat-net02 ping tomcat-net01
+
+```
+
+#### 网络连通
+```
+//把容器放入网络mynet
+docker run -d -P --name tomcat01 tomcat:9.0
+docker network connect mynet tomcat01
+docker network inspect mynet
+```
+
+#### Redis集群
+```
+for port in $(seq 1 6); \
+do \
+mkdir -p /mydata/redis/node-${port}/conf
+touch /mydata/redis/node-${port}/conf/redis.conf
+cat  EOF /mydata/redis/node-${port}/conf/redis.conf
+port 6379 
+bind 0.0.0.0
+cluster-enabled yes 
+cluster-config-file nodes.conf
+cluster-node-timeout 5000
+cluster-announce-ip 172.38.0.1${port}
+cluster-announce-port 6379
+cluster-announce-bus-port 16379
+appendonly yes
+EOF
+done
 
 
+docker run -p 6371:6379 -p 16371:16379 --name redis-1 \
+    -v /mydata/redis/node-1/data:/data \
+    -v /mydata/redis/node-1/conf/redis.conf:/etc/redis/redis.conf \
+    -d --net redis --ip 172.38.0.11 redis:5.0.9-alpine3.11 redis-server /etc/redis/redis.conf
+	
+docker exec -it redis-1 /bin/sh
 ```
