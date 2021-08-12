@@ -129,3 +129,78 @@ flex (属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 
 
 align-self(允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。)
 ```
+
+## 用纯CSS创建一个三角形的原理是什么
+```css
+div{
+	width:0;
+	height:0;
+	border-left:20px solid transparent;
+	border-top:20px solid transparent;
+	border-right:20px solid transparent;
+	border-bottom:20px solid red;
+}
+```
+
+## 一个满屏品字布局如何设计
+```
+方法一：
+1.设置上面有宽度的盒子 margin: 0 auto
+2.下面两个盒子设置float或inline设置不换行
+3.通过margin来调整位置
+
+方法二:
+1.设置上面盒子width:100%
+2.设置下面div分别宽50%，设置float 或 inline
+```
+
+## 常见的兼容性问题
+```
+1.不同浏览器的margin,pading等默认值不一样
+2.IE6-7中设置高度height小于10px会显示超出，可设置overflow:hidde或line-height小于高度
+3.使用getAttribute()获取属性
+4.hover样式问题：设置Css属性的顺序L-V-H-A(love hate) a:link{} a:visited{} a:hover{} a:active{}
+
+```
+
+## display:none与visibility：hidden的区别
+```
+1. display:none 不显示对应的元素，文档布局中不会分配空间（回流和重绘）
+2. visibility:hidden 会隐藏元素，在文档布局中存在空间（重绘）
+```
+
+## position,display,overflow,float在一起使用
+```
+position: absolute/fixed优先级最高，这时float不起作用，需要调整display;
+float或absolute定位，只能是块元素或表格
+```
+
+## BFC规范（块级格式化上下文）
+```
+1) BFC:块级格式化上下文
+	a)形成BFC的条件
+		i)浮动元素（float除none以外的值）
+		ii)定位元素position(absolute/fixed的值)
+		iii)overflow设置为hidden/auto/scroll
+		iiii)display设置（inline-block/table-cell/table-caption/flex-inline)
+	b)BFC特性
+		i)内部块盒子会在垂直方向布局
+		ii)垂直方向上margin会叠加，值由最大margin值决定(改变其中一盒子为BFC)
+		iii)BFC的区域不会flaot元素重叠
+		iiii)计算高度时浮动参与计算
+		iiiii)独立容器，内部元素不会影响外面的元素
+```
+## 为什么会出现浮动和什么时候需要清除浮动？清除浮动的方式？
+```
+浮动问题:
+1.无法撑开父元素的高度，影响同级元素
+2.同级非浮动元素会跟随其后（内联）
+3.浮动元素后面的元素需要清除浮动
+
+清除浮动方式:
+1.父级div设置height
+2.浮动后面添加空div并设置clear:both
+3.浮动的父标签设置overflow:hidden/auto 或者设置zoom
+```
+
+21
