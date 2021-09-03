@@ -203,4 +203,67 @@ float或absolute定位，只能是块元素或表格
 3.浮动的父标签设置overflow:hidden/auto 或者设置zoom
 ```
 
-21
+## Css3属性-webkit-font-smoothing实现抗锯齿
+```css
+//非标准
+//chrome/safari
+-webkit-font-smoothing: antialiased;//subpixel-antialiased默认值 ， none对低像素文本比较好 ，antialiased 抗锯齿比较好
+
+//firefox
+-moz-osx-font-smoothing: grayscale;
+
+```
+
+## @import 与 link 的区别
+```
+1.@import只能导入css ,link可导入css,图片/脚本/字体等
+
+2.@import只能在页面加载了才能加载css, link可以在页面加载同时加载css
+
+3.@import 不能兼容ie5以下，link没有兼容性问题
+
+4.link可以通过js操作Dom动态插入样式
+```
+
+## 规则
+```
+@namespace 让CSS引擎知道是必须考虑XML命名空间
+@media 设置媒体查询
+@page  描述打印文档时布局的变化
+@font-face 下载外部的字体
+@keyframes 描述Css动画的关键帧
+@document 文档样式表满足条件规则
+```
+
+## 单行和多行
+```
+//单行
+{
+	max-width:300px;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	overflow:hidden;
+}
+
+//多行
+{
+	display:-webkit-box;
+	-webkit-box-orient:vertical;
+	-webkit-line-clamp:2;
+	overflow:hidden;
+}
+
+可以设置line-height整数倍防止超出文字漏出
+
+```
+
+## 设置背景边角
+```
+width: 160px;
+background: linear-gradient(135deg, transparent 8px, #3ED1FF 0) top left,
+		linear-gradient(-135deg, transparent 8px, #3ED1FF 0) top right,
+		linear-gradient(-45deg, transparent 8px, #3ED1FF 0) bottom right,
+		linear-gradient(45deg, transparent 8px, #3ED1FF 0) bottom left;
+background-size: 50% 50%;
+background-repeat: no-repeat;
+```
