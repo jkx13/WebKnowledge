@@ -133,6 +133,7 @@ useEffect(()=>{//根据count变化后才执行，相当于Vue的computed计算�
 ### 路由组件的lazyLoad
 
 ```js
+	import {lazy} from 'React';
 	//1.通过React的lazy函数配合import()函数动态加载路由组件 ===> 路由组件代码会被分开打包
 	const Login = lazy(()=>import('@/pages/Login'))
 	
@@ -389,6 +390,10 @@ componentDidCatch(error, info) {
 #### 比较好的搭配方式：
 		父子组件：props
 		兄弟组件：消息订阅-发布、集中式管理
-		祖孙组件(跨级组件)：消息订阅-发布、集中式管理、conText(开发用的少，封装插件用的多)
+		祖孙组件(跨级组件)：消息订阅-发布、集中式管理、context(开发用的少，封装插件用的多)
 
 
+## immer
+```
+Immer 是 mobx 的作者写的一个 immutable 库，核心实现是利用 ES6 的 proxy，几乎以最小的成本实现了 js 的不可变数据结构，简单易用、体量小巧、设计巧妙，满足了我们对JS不可变数据结构的需求。
+```

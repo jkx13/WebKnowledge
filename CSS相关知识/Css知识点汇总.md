@@ -267,3 +267,77 @@ background: linear-gradient(135deg, transparent 8px, #3ED1FF 0) top left,
 background-size: 50% 50%;
 background-repeat: no-repeat;
 ```
+
+## padding实现图片自适应
+```html
+1.子容器的padding百分比大小是相对父容器的宽度来计算的（父width * 百分比)
+
+<div class="main">
+	<img src="./x.png" />
+</div>
+
+.main{
+	padding-bottom:60%;//为图片宽高比例
+	position:relative;//让图片脱离文档流，不撑开main
+	img{
+		position:absolute;
+		with:100%;
+	}
+}
+```
+
+## ::selection伪元素
+```
+//设置文本选中的样式
+p::selection{
+	background-color:#262626;
+	color:#fff
+}
+```
+
+## calc计算
+```
+//calc() 函数用于指定使用大小、角度、时间或数字作为值的属性的计算值。这允许根据不同单位的加减来设置值
+.modal{
+	position:absolute;
+	top: calc(50% - 50px);
+}
+```
+
+## var函数
+```
+//var() 函数允许你使用自定义变量的值作为属性值
+
+:root{
+	--primary-bg-color:#fff;
+}
+
+button{
+	background-color: var(--primary-bg-color)
+}
+```
+
+## 适配浏览器是否支持该属性
+```
+//@supports 规则允许你在使用之前检查浏览器是否支持特定的一个或多个属性
+
+@supports (display:grid){
+	section{
+		display:grid;
+	}
+}
+
+@supports (image-rendering){
+	img{
+		image-rendering:pixelated;
+	}
+}
+```
+
+## text-overflow设置文本省略号
+```
+p{
+	text-overflow: ellipsis;
+}
+```
+
