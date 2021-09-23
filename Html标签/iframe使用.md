@@ -1,6 +1,12 @@
 ## iframe使用说明
 
+```html
+<iframe name="myiframe" src="./index.html"></iframe>
 
+//与a标签组合使用
+
+<a href="./src/index.html" target="myiframe"></a>
+```
 
 
 ## iframe监听事件（加载完成)
@@ -74,4 +80,40 @@ function getInfo(){};
 //在父容器中调用iframe中页面
 var curIframe = window.iframes('iframe-id');
 curIframe.getInfo();
+```
+
+##  window对象的postMessage方法
+#### 允许来自不同源的脚本采用异步方法进行有限的通信
+	可以实现跨文本文档，多窗口，跨域消息传递
+
+#### 示例
+```javascript
+
+targetWindow.postMessage(message,targetOrigin,[transfer])
+1. targetWindow: 目标窗口（发送跨域消息的那个窗口），例如：iframe.contentWindow
+
+2. message: 将要发送的数据
+
+3. targetOrigin: 目标窗口的地址( * 表示任何URL 都可以发送)
+4. transfer: 是一串和message 同时传递的 Transferable 对象. 这些对象的所有权将被转移给消息的接收方，而发送一方将不再保有所有权
+```
+
+#### 例子
+1. 父页面通过iframe引入子页面
+```html
+<body>
+<h1>父页面</h1>
+<iframe id="curIframe" src="http://www.test.com"
+</body
+```
+
+2. 父页面向子页面发送一条消息
+```
+//获取子页面的iframe实例
+const curIframe = document.getElement.ById('curIframe')
+
+//在需要等到iframe中的子页面加载完成
+curIframe.onload = function(){
+	curIframe.contentWindow.postMessage('')
+}
 ```
