@@ -39,3 +39,9 @@ npm install --save-dev cross-env
 
 console.log(process.env.RUN_ENV)//production
 ```
+
+## path.join 与 path.resovle区别
+```
+1. path.join会进行字符串拼接成一个路径（如果有非字符串会报错)
+2. path.resolve通过类似 cd xxx 到每一项 ,最后pwd 为返回路径
+```

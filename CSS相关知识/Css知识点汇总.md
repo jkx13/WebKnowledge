@@ -349,3 +349,42 @@ p{
 	属性:值;
 }
 ```
+
+## 设置边框透明
+```css
+border:10px solid hsla(0,0%,100%,.5);
+```
+
+## animation
+```
+CSS animation 属性是 animation-name，animation-duration, animation-timing-function，animation-delay，animation-iteration-count，animation-direction，animation-fill-mode 和 animation-play-state 属性的一个简写属性形式。
+```
+
+## hover摆动动画
+```css
+div{
+	animation: shake 2s ease 0s infinite;
+	animation-play-state:paused;
+}
+	
+div:hover{
+	animation-play-state:running;
+}
+
+@keyframes shake{
+	from {
+		transform:roate(0deg);
+	}
+	4% {
+		transform:rotate(5deg);
+	}
+	12.5% { transform: rotate(-5deg); }
+	21% { transform: rotate(5deg); }
+	29% { transform: rotate(-5deg); }
+	37.5%{ transform: rotate(5deg); }
+	46%{ transform: rotate(-5deg); }
+	50%,to{
+		transform:rotate(0deg);
+	}
+}
+```

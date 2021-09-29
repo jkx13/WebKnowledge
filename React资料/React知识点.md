@@ -397,3 +397,64 @@ componentDidCatch(error, info) {
 ```
 Immer 是 mobx 的作者写的一个 immutable 库，核心实现是利用 ES6 的 proxy，几乎以最小的成本实现了 js 的不可变数据结构，简单易用、体量小巧、设计巧妙，满足了我们对JS不可变数据结构的需求。
 ```
+
+## 组件Props属性值类型限制和必要性限制
+```javascript
+CurComponent.propTypes = {
+	name:React.PropTypes.string.isRequired,
+	age:React.PropTypes.number
+}
+
+//第二种
+import PropTypes from 'prop-types';
+CurComponent.propTypes = {
+	name:PropTypes.string.isRequired,
+	age:PropTypes.number
+}
+```
+
+## 设置Component组件Pops默认值
+```js
+constructor(props){
+	super(props)
+	console.log(props)
+}
+
+CurComponent.defaultProps = {
+	name:'jk'
+}
+
+```
+
+## 事件处理
+#### 1.通过onXxx属性指定事件处理函数(注意大小写)
+	(1)React使用的是自定义(合成)事件, 而不是使用的原生DOM事件
+	(2)React中的事件是通过事件委托方式处理的(委托给组件最外层的元素)
+
+#### 2.通过event.target得到发生事件的DOM元素对象
+
+## 渲染类组件标签的基本流程
+```
+1.React内部会创建组件实例对象
+2.调用render()得到虚拟DOM, 并解析为真实DOM
+3.插入到指定的页面元素内部
+```
+
+## state属性理解和注意
+```
+1.state是组件对象最重要的属性, 值是对象(可以包含多个key-value的组合)
+2.组件被称为"状态机", 通过更新组件的state来更新对应的页面显示(重新渲染组件)
+3.组件中render方法中的this为组件实例对象
+4.组件自定义的方法中this为undefined，如何解决
+a)强制绑定this: 通过函数对象的bind()
+b)箭头函数
+5.状态数据，不能直接修改或更新
+
+```
+
+## babel.js的作用
+```
+1)浏览器不能直接解析JSX代码, 需要babel转译为纯JS的代码才能运行
+2)只要用了JSX，都要加上type="text/babel", 声明需要babel来处理
+
+```
