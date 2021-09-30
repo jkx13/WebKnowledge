@@ -112,3 +112,60 @@ import * as all from './index.js';
 
 import {default as all} from './index.js';
 ```
+
+##  jsonp的解释
+	jsonp表示在回调执行函数中的参数填充json数据
+	script标签是不受同源策略限制的
+	1.通过访问另外非同源下的js文件（js内容包含jsonpCallback({content:'jk'}))
+	2.访问服务端传回调函数名称，返回回调填充json数据的函数并执行
+```js
+function createJsonpTag(url,callbackName,successCB){
+	let script = document.createElement('script');
+	script.type = 'text/javascript';
+	script.src = url;
+	script.async = true;
+	
+	window[callbackName] = function(data){
+		successCB && successCB(data);
+	}
+	
+	document.body.appendChild(script);
+}
+
+window.onload = function(){
+	createJsonpTag('http://xxx','jsonpCallback',(data)=>{
+		console.log(data);
+	})
+}
+```
+
+##  script 两个关键属性(deter,async)
+	deter:defer属性告诉浏览器要等整个页面载入以后、解析完毕才执行该<script.../>中的脚本
+	async:指定async属性的的<script.../>的脚本会启动新的线程，异步执行<script.../>导入的脚本文件
+	
+```js
+<script src='test.js' type='text/javascript' deter></script>
+```
+
+## Generator原理
+	ES6新语法,异步编程函数方法
+	1.使用function*表示一个generator函数
+	2.内部通过yield暂停代码
+	3.通过调用生成器赋值对象的next方法
+
+```js
+var promise = function () {
+    return new Promise((resolve, reject) => {
+        resolve('ok')
+    })
+}
+function* test() {
+    yield promise();
+}
+var g = test();
+var obj =  g.next();//{value:"promise",done:"boolean"}
+obj.value.then((res) => {
+    console.log('res=='+res);//ok
+})
+g.next();
+```
