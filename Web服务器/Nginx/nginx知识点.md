@@ -30,3 +30,55 @@
 	server_addr #服务器地址，在完成一次系统调用后可以确定这个值。
 	server_name #服务器名称。
 	server_port #请求到达服务器的端口号。
+	
+## Nginx 中rewrite(重定向)
+#### 语法
+1. 语法: rewrite 正则 替换url flag
+2. 应用于 server,location,if中
+3. rewrite实现重定向重要指令(根据regex正则表达式匹配内容跳转到替换url,falg标记符号)
+
+```shell
+rewrite ^/(.*) https://baidu.com permanent #永久重定向到baidu.com
+
+#添加个server区块跳转
+server{
+	listen  80;
+	server_name baidu.com;
+	rewrite ^/(.*) https://www.baidu.com/$1 permanent;
+}
+```
+
+#### 正则表达
+|字符| 描述 |
+|--|--|
+|\ |将后面接着的字符标记为一个特殊字符或者一个原义字符或一个向后引用|
+|^ | 匹配输入字符串的起始位置|
+|$|匹配输入字符串的结束位置|
+|*|匹配前面的字符零次或者多次|
+|+|匹配前面字符串一次或者多次|
+|?|匹配前面字符串的零次或者一次|
+|.|匹配除“\n”之外的所有单个字符|
+|(pattern)	|匹配括号内的pattern|
+｜~｜区分大小写匹配|
+|~*|不区分大小写匹配|
+|!~和!~*｜ 分别区分大小写不匹配及不区分大小写不匹配|
+|-f和!-f|用来判断是否存在文件|
+|-d和!-d|用来判断是否存在目录|
+|-e和!-e|用来判断是否存在文件或目录|
+|-x和!-x|用来判断文件是否可执行|
+
+#### 最后一项flag
+|标记符号|说明|
+|--|--|
+|last|本条规则匹配完成后继续向下匹配新的location URI规则|
+|break|本条规则匹配完成后终止，不在匹配任何规则|
+|redirect|返回302临时重定向|
+|premanent|返回301永久重定向|
+
+
+## nginx命令
+
+```
+1. nginx -t //检查语法
+2. nginx -s reload //重新加载修改后的配置
+```
