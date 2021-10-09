@@ -15,10 +15,29 @@
 
 2. 命令使用
 ```
-开始构建镜像: docker-compose up （守护进程需加 -d）
+参数选项:
+-f --file FILE指定Compose模板文件，默认为docker-compose.yml
+-p --project-name NAME 指定项目名称，默认使用当前所在目录为项目名
+--verbose  输出更多调试信息
+-v，-version 打印版本并退出
+--log-level LEVEL 定义日志等级(DEBUG, INFO, WARNING, ERROR, CRITICAL)
 
-停止运行中的容器: docker-compose down 
-
-重新构建容器: docker-compose build
+基本命令:
+docker-compose up #启动容器（守护进程需加 -d）
+docker-compose down #关闭并删除容器
+docker-compose [start | stop | pause | restart] #启动/停止/暂停/重启 容器 
+docker-compose run NAME ping baidu.com #在指定容器运行命令
+docker-compose kill #机制停止容器
+docker-compose scale #设置服务运行的容器个数
+docker-compose ps #列出项目中所有的容器
+docker-compose rm #删除容器
+docker-compose logs #查看日志
+docker-compose bulid #构建项目中的容器
+docker-compose push #推送镜像
+docker-compose pull #拉取依赖镜像
+docker-compose config #查看项目容器配置
+docker-compose create #为服务创建容器
+docker-compose exec NAME /bin/bash #进入指定容器
+docker-compose port NAME 端口号 #显示某个容器端口所映射的公共端口
 
 ```
