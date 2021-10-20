@@ -114,6 +114,15 @@ const curIframe = document.getElement.ById('curIframe')
 
 //在需要等到iframe中的子页面加载完成
 curIframe.onload = function(){
-	curIframe.contentWindow.postMessage('')
+	curIframe.contentWindow.postMessage({msg:'信息'},'http://xxx')
 }
+```
+
+2. 子iframe页面监听message
+```
+window.addEventListener('message',function(event){
+	console.log('event',event)
+	console.log('event.origin',event.origin)// http://xxx
+	console.log('event.data',event.data) // {msg:'信息'}
+})
 ```

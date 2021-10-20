@@ -458,3 +458,12 @@ b)箭头函数
 2)只要用了JSX，都要加上type="text/babel", 声明需要babel来处理
 
 ```
+
+## React.cloneElement方法
+```javascript
+
+function cloneElement = (props)=>{
+	return React.cloneElement(<div/>,props,<p>复制嵌套子元素</p>)
+}
+
+```

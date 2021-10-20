@@ -1,3 +1,17 @@
+
+## CSRF攻击
+```html
+1. 先访问攻击网站获得该网站的cookies
+2. 用户访问恶意网站,诱导触发如下表单，攻击网站就会收到正确cookies而发起攻击请求
+<from action="攻击网站地址" meth="POST">
+</from>
+```
+## 跟踪用户信息
+```
+//在第三方网站插入一张看不见的图片,浏览器在加载上面代码时，就会向xxx.com发送Cookies 的请求，xxx.com就知道你是谁，访问了什么网站
+<img src="xxx.com" style="visibility:hidden;"
+```
+
 ## samesite属性说明(Cookies的属性)
 ```
 1. samesit属性用来防止 CSRF 攻击和用户追踪（限制第三方 Cookie，从而减少安全风险）

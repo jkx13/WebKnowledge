@@ -4,7 +4,7 @@
 1. 安装
 [官网下载](https://docs.docker.com/compose/install/)
 ```shell
-下载: sudo curl -L  https://get.daocloud.io/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+下载: sudo curl -L  https://get.daocloud.io/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 
 
 赋权：sudo chmod +x /usr/local/bin/docker-compose
