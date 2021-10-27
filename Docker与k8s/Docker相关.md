@@ -135,7 +135,7 @@ docker stats
 ```
 //-v挂载
 //portainer
-docker run -d -p8080:9000 --restart=always -v /var/run/docker.sock/:/var/run/docker.sock --privileged=true portainer/portainer
+docker run -d -p8081:9000 --restart=always -v /var/run/docker.sock/:/var/run/docker.sock --privileged=true portainer/portainer
 
 //Rancher(CI/CD)持续集成
 ```

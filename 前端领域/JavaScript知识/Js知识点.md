@@ -39,3 +39,10 @@ document.onselectstart = (e)=>{e.preventDefault()}
 document.oncontextmenu = ""
 document.onselectstart = true
 ```
+
+## for...of 与for ... in 区别
+```javascript
+1. for(let i of [Array])不能遍历object
+2. for(let i in [Object/Array]) 遍历的i是对应的key值 而for...of遍历数组的value值
+3. for...in 能遍历自定义的属性（var arr= ['a','b'];arr.name='jk'),for...of 不能
+```

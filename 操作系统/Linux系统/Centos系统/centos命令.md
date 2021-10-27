@@ -176,3 +176,22 @@ rpm -e mariadb-libs-5.5.60-1.el7_5.x86_64 --nodeps
 (10) *.xz 用 xz -d 解压
 (11) *.tar.xz 用 tar -zJf 解压
 ```
+
+## centos 网络设置
+```shell
+1. 设置IP相关信息
+vim /etc/sysconfig/network-scripts/ifcfg-en33
+
+2. 设置添加信息
+BOOTPROTO=static
+
+ONBOOT=yes
+IPADDR=192.168.0.110
+NETMASK=255.255.255.0
+GATEWAY=192.168.0.1
+DNS1=114.114.114.114
+
+2.重启网络
+service network restart / systemctl restart network.service
+
+```

@@ -388,3 +388,23 @@ div:hover{
 	}
 }
 ```
+
+## 将div元素中的文本分为3列:(IE不支持)
+```
+div{
+	-moz-column-count:3;
+	-webkit-column-count:3;
+	column-count:3;
+	column-gap:1px;//指定列之间的间隙
+}
+```
+
+## bootstrap响应式预设尺寸
+#### 每行总共24个栅格，在不同尺寸的页面上如何分配宽度比例
+|名称|尺寸|
+|-|-|
+|xs|<768px|
+|sm|>=768px|
+|md|>=992px|
+|lg|>=1200px|
+|xl|>=1920px|
