@@ -5,6 +5,8 @@
 
 #### 镜像阿里云地址
 [阿里云](https://developer.aliyun.com/article/110806)
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
 
 #### 启动docker
 ```
@@ -65,6 +67,11 @@ docker ps -a
 #### 搜索容器
 ```
 docker search 名称 --filter=STARS=3000
+```
+
+#### 容器登录
+```
+docker login 命令用于登陆到一个 Docker镜像仓库，如果未指定镜像仓库地址，默认为官方仓库 Docker Hub。
 ```
 
 #### 拉取容器
@@ -364,4 +371,38 @@ docker run -p 6371:6379 -p 16371:16379 --name redis-1 \
     -d --net redis --ip 172.38.0.11 redis:5.0.9-alpine3.11 redis-server /etc/redis/redis.conf
 	
 docker exec -it redis-1 /bin/sh
+```
+
+[compose 选项](https://juejin.cn/post/6844903602129993741)
+
+## docker-compose 中networks详解
+```
+概念:默认情况,compose会为应用创建一个网络，服务的每个容器都会加入这个网络中
+服务名称作为hostname被其他容器访问；
+应用程序的网络名称基于Compose的工程名称
+而项目名称基于docker-compose.yml所在目录的名称。如需要修改工程名称，可使用--project-name标识或COMPOSE_PROJECT_NAME环境变量。
+
+1.更新容器
+当服务的配置发生变更时，可使用docker-compose up命令更新配置。
+此时，Compose会删除旧容器并创建新容器。新容器会以不同的IP地址加入网络，名称保持不变。任何指向旧容器的连接都会被关闭，容器会重新找到新容器并连接上去。
+
+2.links
+服务之间可使用服务名称相互访问。links允许定义一个别名，从而使用给别名访问其他服务。
+
+3.指定自定义网络
+services:
+	p:
+		build: ./p
+		networks:
+			- front
+	db:
+		image: postgres
+		networks:
+			- back
+	app:
+		build: ./app
+		networks:
+			-front
+			-back
+其中p与db服务隔离，两者分别使用自己的网络，app服务可与两者通信。使用networks命令，可方便实现服务间的网络隔离与连接。
 ```
