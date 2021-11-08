@@ -56,3 +56,18 @@ document.onselectstart = true
 注意:slice()这里第二位数字如果是负数是加完字符串长度后的数字：length=11;slice(7,-6);-6+11=5 => slice(7,5)第二位小于第一位为空字符
 slice(-2)取倒数两位
 ```
+
+## this绑定问题
+```
+1. 使用new 绑定
+this绑定的是新创建的实例对象(var obj = new func();)
+
+2. 使用call,apply,bind显式绑定
+this绑定是原生绑定方法call,apply,bind的第一参数;如 func.call(obj);func中的this是obj
+
+3.函数是在对象object里的属性
+this绑定就是那个上下文对象;如let obj = {func:func}; obj.func(); func中的this就是obj,隐性绑定
+
+4.以上都不是就是默认绑定
+在严格模式下默认绑定就是undefined;不然就是window
+```
