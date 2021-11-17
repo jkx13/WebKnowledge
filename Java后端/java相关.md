@@ -58,3 +58,16 @@ Setting => Build,Execution => Application Server =>新增tomcat相应目录
 2. Java Web三大组件之一：Servlet程序，Filter过滤器，Listener监听器
 3. 运行在服务器上Java小程序，接收请求，发送响应
 
+## java内省
+```
+在类UserInfo中有属性 userName, 那我们可以通过 getUserName,setUserName来得到其值或者设置新的值。
+通过 getUserName/setUserName来访问 userName属性，这就是默认的规则。 
+Java JDK中提供了一套 API 用来访问某个属性的 getter/setter 方法，这就是内省。
+
+PropertyDescriptor类表示JavaBean类通过存储器导出一个属性。主要方法：
+    　　1. getPropertyType()，获得属性的Class对象;
+    　　2. getReadMethod()，获得用于读取属性值的方法；getWriteMethod()，获得用于写入属性值的方法;
+    　　3. hashCode()，获取对象的哈希值;
+    　　4. setReadMethod(Method readMethod)，设置用于读取属性值的方法;
+    　　5. setWriteMethod(Method writeMethod)，设置用于写入属性值的方法。
+```
