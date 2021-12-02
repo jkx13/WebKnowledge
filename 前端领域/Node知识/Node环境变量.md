@@ -3,7 +3,7 @@
 npm config list
 ```
 
-## 配置node_global与 node_cache
+## 配置node_global与 node_cache(注意不要使用管理员权限终端运行)
 ```shell
 npm config set prefix "D:\myNode\node_global"
 npm config set cache "D:\myNode\node_cache"

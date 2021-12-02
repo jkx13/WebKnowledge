@@ -1,4 +1,5 @@
 ## 事件钩子
+[](https://www.jianshu.com/p/b331d0e4b398)
 ```js
 import React, { Component } from 'react'
 
