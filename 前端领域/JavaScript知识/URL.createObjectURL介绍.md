@@ -48,3 +48,91 @@ function dataURLtoBlob(dataurl) {
 }
 
 ```
+
+## 将file转化成base64
+### 1. 使用URL.createObjectURL
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+	<title>base</title>
+</head>
+<body>
+<input type="file" name="" id="file">
+<img src="" id="img">
+<script type="text/javascript">
+	window.onload = function () {
+		let $img = document.getElementById('img')
+		file.onchange = function (e) {
+			console.log(e.target.files[0])
+			let file = e.target.files[0]
+			let fileUrl = window.URL.createObjectURL(file)
+			$img.src = fileUrl
+			img.onload = function () {
+			    // 手动回收
+			    URL.revokeObjectURL(fileUrl)
+			}
+		}
+	}
+</script>
+</body>
+</html>
+
+```
+
+### 2. 使用FileReader.readAsDataURL()
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+	<title>base</title>
+</head>
+<body>
+<input type="file" name="" id="file">
+<img src="" id="img">
+<script type="text/javascript">
+	window.onload = function () {
+		let $img = document.getElementById('img')
+		file.onchange = function (e) {
+			console.log(e.target.files[0])
+			let file = e.target.files[0]
+			const fr = new FileReader(file)
+			fr.readAsDataURL(file)
+			fr.onload = function () {
+			 	$img.src = this.result
+			}
+		}
+	}
+</script>
+</body>
+</html>
+
+```
+
+## canvas 转为DataURL
+将canvas画出图片 转 Dataurl放入img中
+```javascript
+let imgSrc = canvas.toDataURL('image/png')
+// canvas.toDataURL('image/jpeg')
+```
+
+## Blob对象显示图片
+将Blob对象转 Dataurl
+```javascript
+canvas.toBlob(function (blobObj) {
+	let imgSrc = window.URL.createObjectURL(blobObj)
+	document.getElementById('img').src = imgSrc
+})
+
+```
+
+## 下载Dataurl展示的图片
+```javascript
+function downloadImg () {
+	let aLink = document.createElement('a')
+	aLink.download = 'fileName.png' // 文件名后缀需要和dataurl表示的相同，否则可能乱码
+	aLink.href = dataUrl// DataURL
+	aLink.click()
+}
+
+```
