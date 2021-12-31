@@ -57,6 +57,18 @@ document.onselectstart = true
 slice(-2)取倒数两位
 ```
 
+##  箭头函数
+箭头函数不具备this，arguments；自己没有this就找上一级的this
+#### 改变this指向的常用方法
+1. apply/call/bind
+2. var that=this
+3. 箭头函数 如何确定this是谁：看谁调用的，.点前面是谁this就是谁
+```javascript
+let func = a=>b=>a+b;
+let sum = func(1)(2);
+console.log(sum)// 3
+```
+
 ## this绑定问题
 ```
 1. 使用new 绑定
