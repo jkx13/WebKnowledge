@@ -126,3 +126,19 @@ window.addEventListener('message',function(event){
 	console.log('event.data',event.data) // {msg:'信息'}
 })
 ```
+
+## 网站页面允许被第三方以iframe形式嵌入
+1. 设置nginx来允许网站页面被第三方嵌入
+2. 在nginx'http', 'server' 或者 'location' 的配置中加上这句
+```
+add_header X-Frame-Options ALLOW-FROM url
+
+注: url是指代调用页面的第三方网站的服务器地址
+```
+3. 或在响应头上加上这句话
+```
+response.setHeader("X-Frame-Options","ALLOW-FROM uri ")。
+
+注: url是指代调用页面的第三方网站的服务器地址
+
+```
