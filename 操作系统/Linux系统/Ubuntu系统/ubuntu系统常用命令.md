@@ -62,3 +62,31 @@ apt-get upgrade
 	# dpkg --remove --force-all  软件包名
 	# dpkg --force-remove-reinstreq 软件包名
 
+## apt添加阿里源
+
+### 备份修改源
+```
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak 
+sudo vim /etc/apt/sources.list sudo apt update 
+sudo apt upgrade
+
+```
+源内容：
+```
+deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse 
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse 
+deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse 
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse 
+deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse 
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse 
+deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse 
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse 
+deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse 
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+```
+
+### 更新
+```
+sudo apt update
+sudo apt upgrade
+```

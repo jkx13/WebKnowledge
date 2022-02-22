@@ -36,3 +36,5 @@ linux: /etc/hosts
 - windows刷新dns缓存(linux不需要)
 用 WIN+R 快捷键打开运行窗口，输入命令：cmd 并回车进入命令行窗口。 
 接着输入命令：ipconfig /flushdns 回车后执行刷新本地 dns 缓存数据即可。
+
+
