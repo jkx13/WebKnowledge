@@ -355,5 +355,307 @@ promise.then((res)=>{
 })
 ```
 
-[](https://juejin.cn/post/7064507539450232862?utm_source=gold_browser_extension#heading-5)
+## async和await
+ES8引入了async和await，更近一步地简化了Promise异步操作，可以让异步代码看起来像同步代码一样;
+
+- await，则函数必须被async所修饰，async函数的返回值为Promise对象
+- await右侧表达式一般为Promise对象
+
+```javascript
+//
+const p1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    let data = "数据"
+    resolve(data)
+  }, 2000)
+})
+
+async function getData() {
+  const res1 = await p1
+  console.log(res1)
+}
+
+getData()
+
+p1.then(res2 => console.log(res2)) // 执行后，可以发现res1的值和res2一样
+
+
+```
+用async修饰后可以得到Promise对象的成功回调的值，不需要再用.then()链式调用，从而简化了Promise的异步操作。
+
+
+## let关键字
+使用let 关键字用来声明变量，具有以下几个特性：
+
+- 不允许重复声明
+- 块级作用域
+- 不存在变量提升
+- 不影响作用域链
+
+```javascript
+// 1.不允许重复声明
+let a = 1;
+let a = 2;// 不允许，会报错，但var不会
+
+// 2.块级作用域
+{
+  let d = "d";
+  console.log(d);
+}
+console.log(d);// 报错，但var声明不会，因为var没有块级作用域
+
+// 3.不存在变量提升
+console.log(d1);// 不报错
+console.log(d2);// 报错
+var d1 = "1";
+let d2 = "2";
+
+// 4.不影响作用域链
+{
+  let p = "jk";
+	function fn(){
+		console.log(p); // 这里是可以使用的
+	}
+  fn();
+}
+
+```
+
+## const关键字
+
+使用const 关键字用来声明常量，具有以下几个特性：
+注意：const关键字具有let关键字的所有特性，意思是上面let所列举的特性const都有。
+- 声明必须赋初始值
+- 标识符一般为大写（潜规则，看场景）
+- 值不允许修改（注意数组、对象等引用数据类型
+
+```javascript
+
+const person = "jk"
+person = "name" //报错
+
+//数组和对象存的是引用地址，下列操作未改变地址，所以是可行的
+const p = {
+  name:"jk",
+  age:18,
+}
+p.age = 20// 没有问题
+
+const arr = ["1","2"]
+arr.push("3")// 没有问题
+
+arr = ["1","2"]// 改变了地址，报错
+
+```
+
+## 解构赋值
+ES6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构赋值。
+```javascript
+// 数组的解构赋值
+const arr = ['1', '2', '3', '4'];
+let [a, b, c, d] = arr;
+
+// 对象的解构赋值
+let obj = {
+  name:"jk",
+  age:17,
+  say(){
+    console.log("hello world")
+  }
+}
+let {name,age,say} = obj // 一定要对应key名，顺序无所谓，少了也没关系
+
+```
+
+
+## 模板字符串
+模板字符串（template string）是增强版的字符串，本质还是字符串，用反引号（`）标识，具有以下特性：
+
+- 字符串中可以出现换行
+- 可以使用 ${xxx} 形式输出变量
+```javascript
+let str = 'jk'
+let a = `my name is ${str}`
+```
+
+## 简化对象写法
+ES6 允许在大括号里面，直接写入变量和函数，作为对象的属性和方法。这样的书写更加简洁。
+
+```javascript
+let name = 'jk';
+let hello = function(){
+  console.log('hello');
+}
+
+const obj = {
+  name,// 触发同名简写规则
+  age:18,
+  hello,// 触发同名简写规则
+  get:function(){
+    return this.name;
+  },
+  set(val){
+    this.name = val;
+  }// 函数简写
+}
+
+
+```
+
+## Set
+ES6 提供了新的数据结构 Set（集合）;
+它类似于数组，但成员的值都是唯一的，集合实现了 iterator 接口，所以可以使用『扩展运算符』和『for…of…』进 行遍历，Set的常用的属性和方法有：
+
+- size 返回集合的元素个数
+- add 增加一个新元素，返回当前集合
+- delete 删除元素，返回 boolean 值
+- has 检测集合中是否包含某个元素，返回 boolean 值
+- clear 清空集合，返回 undefined
+
+```javascript
+//创建一个空集合
+let s = new Set();
+//创建一个非空集合
+let s1 = new Set([1,2,3,1,2,3]); // [1,2,3],会自动去重
+
+console.log(s1.size);
+console.log(s1.add(4));
+console.log(s1.delete(1));
+console.log(s1.has(2));
+console.log(s1.clear());// undefined
+
+```
+
+## Map 
+ES6 提供了 Map 数据结构。
+它类似于对象，也是键值对的集合。但是“键”的范围不限于字符串，各种类 型的值（包括对象）都可以当作键，差不多就是对象的加强版。
+Map 也实现了iterator 接口，所以可以使用『扩展运算符』和 『for…of…』进行遍历。
+
+Map常用的属性和方法：
+- size 返回 Map 的元素个数
+- set 增加一个新元素，返回当前 Map
+- get 返回键名对象的键值
+- has 检测 Map 中是否包含某个元素，返回 boolean 值
+- clear 清空集合，返回 undefined
+
+```javascript
+// 创建一个空 map
+let map = new Map();
+// 创建一个非空 map
+let map2 = new Map([
+  ['name','jk'],
+  ['age','18']
+]);//{'name' => 'jk','age'=>'18'}
+
+console.log(map2.size);//2
+
+// set 更新/增加一个新元素，返回当前 Map；
+map2.set('age',18);
+
+// “键”的范围不限于字符串
+let fn = function(){
+  console.log("函数")
+}
+map2.set('fn',fn)
+
+// get 返回键名对象的键值
+map2.get('age')
+
+// has 检测 Map 中是否包含某个元素，返回 boolean 值
+console.log(map2.has("name"));// true
+
+// clear 清空集合，返回 undefined
+map2.clear();
+
+```
+
+## ES6中函数参数的默认值
+形参初始值 具有默认值的参数, 一般位置要靠后
+```javascript
+function sum(a,b,c=3) {
+	return a + b + c;
+}
+sum(1,2)//结果6
+```
+
+## 箭头函数
+ES6允许使用箭头（=>）定义函数，箭头函数提供了一种更加简洁的函数书写方式，并且箭头函数在开发中的使用是非常广泛的。
+箭头函数具有以下特性：
+
+- 如果形参只有一个，则小括号可以省略
+- 函数体如果只有一条语句，则花括号可以省略，函数的返回值为该条语句的执行结果
+- 箭头函数的this是静态的，始终指向函数声明时所在作用域下的this的值
+- 箭头函数不能作为构造函数实例化
+- 不能使用 arguments
+
+```javascript
+// 1. 通用写法
+let fn = (a, b) => {
+  return a + b;
+};
+// 2. 省略小括号的情况，只有一个参数，无参数不能省略小括号
+let fn2 = num => {
+  return num;
+};
+// 3. 省略花括号的情况，只有一条return语句
+let fn3 = num => num * 20;
+
+
+// 在浏览器模式下， 箭头函数的this是静态的，始终指向函数声明时所在作用域下的this的值
+console.log(this)// windows
+let obj = {
+	name: "jk",
+  getThis: () => {
+    console.log(this);
+  },
+  getThis2(){
+    console.log(this);
+  }
+};
+obj.getThis();// windows
+obj.getThis2();// obj
+
+
+```
+
+## rest参数（...args）
+ES6 引入 rest 参数，用于获取函数的实参，作用与 arguments 类似，用来代替 arguments，rest参数非常适合不定个数参数函数的场景
+- rest 参数必须是参数列表中最后一个形参
+```javascript
+function sum(...args) {
+  console.log(args);
+}
+let add = (...args) => args.reduce((cur,next)=>cur+next,1);
+sum(1, 2, 3);// [1, 2, 3]
+console.log(add(4, 5, 6));// 1+4+5+6 = 16
+
+//rest 参数必须是最后一个形参
+function sum2(a,b,...args){
+  console.log(args);
+}
+sum2(1,2,3,4,5) // [3,4,5]
+
+```
+
+## spread 扩展运算符（...）
+扩展运算符（spread）也是三个点（...）。它好比 rest 参数的逆运算，将一个数组转为用逗号分隔的参数序列，对数组进行解包。
+扩展运算符的常用应用场景：
+- 数组的合并
+- 数组的克隆
+- 将伪数组转为真正的数组
+
+```javascript
+var arr = [1,2,3]
+
+function fn(){console.log(arguments)}
+
+fn(...arr);// Arguments(3) [1, 2, 3, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+
+let obj1 = {a:1}
+let obj2 = {b:2}
+
+let obj = {...obj1,...obj2}//{a: 1, b: 2}
+```
+
+
 
