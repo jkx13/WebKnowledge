@@ -658,4 +658,145 @@ let obj = {...obj1,...obj2}//{a: 1, b: 2}
 ```
 
 
+## Class
+ES5 都可以做到，新的 class 写法只是让对象 原型的写法更加清晰、更像面向对象编程的语法而已
 
+知识点:
+- class 声明类
+- constructor 定义构造函数初始化
+- extends 继承父类
+- super 调用父级构造方法
+- static 定义静态方法和属性
+- 父类方法可以重写
+
+```javascript
+//es5写法
+function Phone(brand,price){
+  this.brand = brand;
+  this.price = price;
+}
+
+ // 添加方法
+Phone.prototype.call = function(){
+  console.log("hello！");
+}
+ // 实例化对象
+var p = new Phone("h",5999);
+p.call();
+console.log(p);
+
+
+
+//es6写法
+class Phone {
+  // 构造方法，名字是固定的，会自动调用
+  static name = 'app';
+  static change(){
+	  console.log('change')
+  }
+  constructor(brand,price){
+    this.brand = brand;
+    this.price = price;
+  }
+  // 打电话，方法必须使用该方式写，不能call:function(){}
+  call(){
+    console.log("hello！");
+  }
+}
+
+let p = new Phone("x",3999)
+p.call();
+
+```
+
+## Class 继承
+### ES5构造函数继承
+```javascript
+// ES5构造函数继承
+// 手机
+function Phone(brand,price){
+	this.brand = brand;
+	this.price = price;
+}
+Phone.prototype.call = function(){
+	console.log("hello！");
+}
+// 智能手机
+function SmartPhone(brand,price,color,size){
+	Phone.call(this,brand,price);
+	this.color = color;
+	this.size = size;
+}
+// 设置子级构造函数的原型
+SmartPhone.prototype = new Phone;
+SmartPhone.prototype.constructor = SmartPhone;
+// 声明子类的方法
+SmartPhone.prototype.photo = function(){
+	console.log("拍照！");
+}
+SmartPhone.prototype.game = function(){
+	console.log("玩游戏！");
+}
+const sp = new SmartPhone("h",2499,"黑色","5.5inch");
+console.log(sp);
+sp.call();
+sp.photo();
+sp.game();
+```
+### ES6构造函数继承
+```javascript
+// ES6中class类继承
+class Phone{
+	constructor(brand,price) {
+		this.brand = brand;
+		this.price = price;
+	}
+	call(){
+		console.log("我可以打电话！");
+	}
+}
+
+class SmartPhone extends Phone{
+// 构造函数
+	constructor(brand,price,color,size) {
+		super(brand,price); // 调用父类构造函数
+		this.color = color;
+		this.size = size;
+	}
+	// 子类对父类方法重写
+	// 直接写，直接覆盖
+	// 注意：子类无法调用父类同名方法
+	call(){
+		console.log("call！");
+	}
+	photo(){
+		console.log("photo！");
+	}
+	game(){
+		console.log("game！");
+	}
+}
+const p = new SmartPhone("x6",1999,"黑色","5.15inch");
+console.log(p);
+p.call()// call！
+```
+
+### class 设置getter与setter
+
+```javascript
+
+
+class Phone{
+	constructor(price){
+		this.price = price;
+	}
+	get price(){
+		console.log("价格属性被读取了！");
+		// 返回值
+		return 123;
+	}
+	set price(value){// 只是在构造设置值时触发
+		console.log("价格属性被修改了！");
+	}
+}
+```
