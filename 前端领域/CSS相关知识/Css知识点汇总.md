@@ -408,3 +408,44 @@ div{
 |md|>=992px|
 |lg|>=1200px|
 |xl|>=1920px|
+
+
+## text-size-adjust 
+```
+默认值：auto 适用于：所有元素 属性值
+auto：文本大小根据设备尺寸进行调整。
+none：文本大小不会根据设备尺寸进行调整。
+<percentage>：用百分比来指定文本大小在设备尺寸不同的情况下如何调整
+```
+- text-size-adjust 属性 允许我们控制将文本溢出算法应用到一些手机设备上。
+- 这个属性还没有写进标准，使用时必须加上前缀：-moz-text-size-adjust，-webkit-text-size-adjust,，和 -ms-text-size-adjust。
+- 因为缩放适配小屏幕而导致文字会变得很小，许多手机浏览器会使用文本溢出算法让文本变大而更易读。
+- 当一个包含文本的元素宽度用了 100%，他的文本大小会增加直到达到一个易读的大小，但是不会修改布局。
+
+### 使用说明
+- 检索或设置移动端页面中对象文本的大小调整。
+- 该属性只在移动设备上生效(PC端chrome中文不能小于12px也是这个属性做怪)；
+- 如果你的页面没有定义meta viewport，此属性定义将无效；
+- 对应的脚本特性为textSizeAdjust。
+
+### 用法
+text-size-adjust会根据设备尺寸而自动调整文字大小，这对于前端效果并不一定是需要的，所以我们一般会修改这个属性，将字体大写严格设置为我们定义的大小
+```
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+```
+或
+```
+html {
+  -ms-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  text-size-adjust: none;
+}
+```
+设置为 text-size-adjust:none 或 text-size-adjust:100% 两种设置等效。 另外，text-size-adjust 在 iPhone 上默认值为 auto，iPad 上的默认值为 none，所以 iPad 并不会出现文字调整的现象。
+

@@ -65,3 +65,8 @@ mshta vbscript:CreateObject("WScript.Shell").Run("wsl -d Ubuntu-20.04 -u root ba
 
 - 以后就可以向 /etc/init.wsl 追加服务，实现开启自启动了
 
+
+## 升级wsl => PowerShell 管理员
+```
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```

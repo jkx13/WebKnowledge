@@ -15,7 +15,11 @@ mysql -uroot -proot
 
 ## 授权
 ```
- GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRAN T OPTION;
+// 5.7
+ GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;
+ 
+ // 8.0
+grant all privileges on *.* to root@'%' with grant option;
 ```
 
 ## 刷新权限

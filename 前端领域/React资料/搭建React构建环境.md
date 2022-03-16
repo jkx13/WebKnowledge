@@ -347,7 +347,7 @@ $ commitizen init cz-conventional-changelog --save --save-exact
 ```
 1.开启git hooks
 npx husky install
-2.install后自动开启git hooks
+2.install后自动开启git hooks（npm set-script prepare "husky install"）
 {
 	"script":{
 		"prepare": "husky install"
