@@ -1,3 +1,5 @@
+## 更新Linux 内核
+[下载地址](https://docs.microsoft.com/zh-cn/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package)
 ## wsl命令
 [官网](https://docs.microsoft.com/zh-cn/windows/wsl/install)
 
@@ -21,6 +23,12 @@ wsl --list --online 或 wsl -l -o
 5. 初始安装后安装其他 Linux 发行版
 ```shell
 wsl --install -d <Distribution Name>
+```
+
+指定Linux 分发版的 WSL 版本：
+
+```shell
+wsl --set-version <distribution name> <versionNumber>
 ```
 
 6. 查看已安装
