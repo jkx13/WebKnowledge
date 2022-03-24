@@ -112,3 +112,7 @@
 ### vscode-styled-components
 	插件名：vscode-styled-components
 	功能：在JS文件中写样式时，有智能提示
+	
+	
+### Regex Previewer
+	功能：测试正则规则
