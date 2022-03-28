@@ -20,6 +20,8 @@ mysql -uroot -proot
  
  // 8.0
 grant all privileges on *.* to root@'%' with grant option;
+
+grant all privileges  on *.* to root@'%' identified by "password";
 ```
 
 ## 刷新权限

@@ -90,3 +90,27 @@ deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted univer
 sudo apt update
 sudo apt upgrade
 ```
+
+## 设置开机启动
+```
+sudo systemctl enable docker.service
+
+```
+
+## 关闭开机启动
+```
+sudo systemctl disable docker.service
+
+```
+
+## 查看是否设置开机启动
+```
+sudo systemctl list-unit-files | grep enable
+
+```
+
+## 查看已启动的服务
+```
+sudo systemctl list-units --type=service
+
+```

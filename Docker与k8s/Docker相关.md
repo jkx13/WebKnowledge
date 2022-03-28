@@ -7,6 +7,10 @@
 [阿里云](https://developer.aliyun.com/article/110806)
 yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 
+## 容器加速
+```
+https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors
+```
 
 #### 启动docker
 ```

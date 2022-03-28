@@ -31,6 +31,12 @@ wsl --install -d <Distribution Name>
 wsl --set-version <distribution name> <versionNumber>
 ```
 
+## 查看版本
+```
+wsl -l -v
+
+```
+
 6. 查看已安装
 ```
 wsl -l或 wslconfig /list
