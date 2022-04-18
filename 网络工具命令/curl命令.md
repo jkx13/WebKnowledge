@@ -15,6 +15,11 @@ curl -o [文件名] www.baidu.com
 curl -L www.baidu.com
 ```
 
+### -d指定param参数
+```
+curl -d "username=jk&password=1" -X POST www.xxx.com
+```
+
 ### 使用 -i 显示http response 头信息 和 网页代码
 ```
 curl -i www.baidu.com
@@ -71,6 +76,7 @@ curl -X [POST/GET/DELETE] www.example.com
 ### Referer字段
 有时你需要在http request头信息中，提供一个referer字段，表示你是从哪里跳转过来的。
 ```
+// 或-e 
 curl --referer http://www.example.com http://www.example.com
 ```
 
@@ -96,6 +102,7 @@ curl -b cookies http://example.com
 ### header 信息
 有时需要在http request之中，自行增加一个头信息。`--header`参数就可以起到这个作用。
 ```
+// 或-H
 curl --header "Content-Type:application/json" http://example.com
 ```
 

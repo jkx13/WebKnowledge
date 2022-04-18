@@ -1,18 +1,14 @@
 ## vm.$attrs
-在使用 props 的方式向子组件传值的时候，子组件没有使用 props 作为接受的话，那么这个属性会自动设置在子组件的最外层的 HTML 标签上。
-如果是 class 和 style 的话，会合并最外层标签的 class 和 style。
-
-想继承父组件传入的非 prop 属性，可以使用 inheritAttrs 禁用继承，然后通过 v-bind="$attrs" 把外部传入的非 prop 属性设置给希望的标签上;
-想将没有设置 props 的属性自动继承到组件最外层的标签上那么你就需要将 inheritAttrs 这个属性设置为 false，但是这不会改变 class 和 style;
-
+- 包含了**父组件**作用域中**不作为 prop 被识别** (且获取) 的 attribute 绑定 (class 和 style 除外)。
+- 当一个**子组件没有声明任何 prop 时**，这里会包含所有父作用域的绑定 (class 和 style 除外)，并且可以通过 **v-bind="$attrs" 绑定到孙子组件中**
 ```javascript
-//父组件
-<test name="name"></test>
+//父组件中
+<children name="name"></children>
 
-//子组件 $attrs 的值就是 { "name": "name" }，这样我们就可以利用这个特性实现组件的属性透传
+//子组件中  $attrs 的值就是 { "name": "name" }，这样我们就可以利用这个特性实现组件的属性透传
+<sun v-bind="$attrs"></sun>
 ```
 
 ## vm.$listener
-一个组件向组件外传值，一种方法就是使用 $emit 向组件外暴露一个事件，然后通过事件方法的参数传值;
-$attrs 的一个作用就是可以批量向组件内传值，$listeners批量向组件外传值;
-$listeners 实际就相当于上面的多个 $emit;
+- 包含了**父组件**作用域中的 (不含 .native 修饰器的)** v-on 事件监听器**
+- v-on="$listeners" 传入子组件中的孙子组件内部组件

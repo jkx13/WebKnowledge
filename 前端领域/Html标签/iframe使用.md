@@ -142,3 +142,25 @@ response.setHeader("X-Frame-Options","ALLOW-FROM uri ")。
 注: url是指代调用页面的第三方网站的服务器地址
 
 ```
+
+## iframe 自适应
+
+- iframe内容未知，高度可预测
+```html
+<iframe src="backtop.html" frameborder="0" scrolling="no" id="external-frame" onload="setIframeHeight(this)"></iframe>
+```
+脚本
+```javascript
+ //document.domain = "xxx.com";
+ function setIframeHeight(iframe) {
+	 if (iframe) {
+		 var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+		 if (iframeWin.document.body) {
+				iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+		}
+	}
+};
+
+window.onload = function () {setIframeHeight(document.getElementById('external-frame'));};
+
+```

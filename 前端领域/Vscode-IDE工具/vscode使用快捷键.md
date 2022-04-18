@@ -9,4 +9,121 @@
 - alt + shift + 单击左键 同一列所有位置添加光标
 - alt + shift + 鼠标选择 选择相同开始和结束的区域
 - alt + 上键或下键 将当前行或者选中的区域上移/下移一行
-
+- Ctrl+Shift+P, F1	显示命令面板
+- Ctrl+P	快速打开，转到文件…
+- Ctrl+Shift+N	新窗口/实例
+- Ctrl+Shift+W	关闭窗口/实例
+- Ctrl+,	用户设置
+- Ctrl+K Ctrl+S	键盘快捷键
+- Ctrl + X	切线(空选择)
+- Ctrl + C	复制行(空选择)
+- Alt +↑/↓	向上/向下
+- Shift+Alt +↓/↑	复制行向上/向下
+- Ctrl + Shift + K	删除线
+- Ctrl+Enter	在下面插入一行
+- Ctrl+Shift+Enter	在上面插入一行
+- Ctrl+Shift+\	跳转到匹配的括号
+- Ctrl+] /[	缩进/缩出行
+- Home / End	进入
+- Ctrl+Home	转到
+- Ctrl+End	执行
+- Ctrl+↑/↓	滚动线上下
+- Alt+PgUp / PgDn	滚动页面上下
+- Ctrl + Shift + [	折叠(collapse)区域
+- Ctrl+Shift+]	展开(uncollapse)区域
+- Ctrl+K Ctrl+[	折叠(collapse)所有子区域
+- Ctrl+K Ctrl+]	展开(uncollapse)所有子区域
+- Ctrl+K Ctrl+0	折叠(折叠)所有区域
+- Ctrl+K Ctrl+J	展开(uncollapse)所有区域
+- Ctrl+K Ctrl+C	添加行注释
+- Ctrl+K Ctrl+U	删除行注释
+- Ctrl+/	切换行注释
+- Shift+Alt+A	切换块注释
+- Alt+Z	切换文字自动换行
+- Ctrl + T	显示所有的符号
+- Ctrl+G	到…行
+- Ctrl+P	转到文件…
+- Ctrl+Shift+O	转到符号…
+- Ctrl+Shift+M	显示问题面板
+- F8	到下一个错误或警告
+- Shift+F8	返回之前的错误或警告
+- Ctrl+Shift+Tab	导航编辑组历史
+- Alt+←/→	返回/前进
+- Ctrl + F	找到
+- Ctrl+H	替换
+- F3 / Shift+F3	查找下一个/上一个
+- Alt+Enter	选择查找匹配
+- Ctrl+D	添加选区到下一个找到匹配的
+- Ctrl+K Ctrl+D	移动最后的选择到下一个找到匹配
+- Alt+C / R / W	切换区分大小写/正则表达式/整个单词
+- Alt + Click	插入光标
+- Ctrl+Alt+↑/↓	将光标插入
+- Ctrl+U	撤销上次光标操作
+- Shift+Alt+I	在每一行的末尾插入光标选中
+- Ctrl+L	选择当前行
+- Ctrl+Shift+L	选择所有当前选择的
+- Ctrl+F2	选择当前单词的所有匹配项
+- Shift + Alt +→	扩展选择
+- Shift + Alt +←	选择收缩
+- Shift+Alt +(拖动鼠标)	列(框)选择
+- Ctrl+Shift+Alt+(箭头键)	列(框)选择
+- Ctrl+Shift+Alt+PgUp/PgDn	列(框)选择页面上/下
+- Ctrl +空格	触发建议
+- Ctrl+Shift+空格	触发参数提示
+- Shift + Alt + F	格式文档
+- Ctrl+K Ctrl+F	格式选择
+- F12	进入定义
+- Alt + F12	Peek定义
+- Ctrl+K +F12	打开定义到边
+- Ctrl +.	快速修复
+- Shift + F12	显示引用
+- F2	重命名符号
+- Ctrl+K Ctrl+X	修剪后面的空格
+- Ctrl+K M	更改文件语言
+- Ctrl + F4, Ctrl + W	关闭编辑器
+- Ctrl+K F	关闭文件夹
+- Ctrl+\	分割编辑器
+- Ctrl+K Ctrl+←/→	聚焦到上一个/下一个编辑组
+- Ctrl+Shift+PgUp / PgDn	移动编辑器左/右
+- Ctrl+K←/→	移动活动编辑组
+- Ctrl + N	新建文件
+- Ctrl+O	打开文件…
+- Ctrl+S	保存
+- Ctrl+Shift+S	保存为
+- Ctrl+K S	保存所有
+- Ctrl+F4	关闭
+- Ctrl+K Ctrl+W	关闭所有
+- Ctrl+Shift+T	重新打开关闭的编辑器
+- Ctrl+K	输入保持预览模式编辑器打开
+- Ctrl + Tab	开放
+- Ctrl + Shift + Tab	键打开以前的
+- Ctrl+K P	活动文件
+- Ctrl+K R	显示活动文件在浏览器
+- Ctrl+K O	显示活动文件在新窗口/实例
+- F11切换	全屏
+- Shift+Alt+0	切换编辑布局(水平/垂直
+- Ctrl + B	切换侧边栏可见性
+- Ctrl+Shift+E	显示浏览器/切换焦点
+- Ctrl + Shift + F	显示搜索
+- Ctrl+Shift+G	显示源代码控制
+- Ctrl + Shift + D	显示调试
+- Ctrl + Shift + X	显示扩展
+- Ctrl+Shift+H	替换文件
+- Ctrl+Shift+J	切换搜索细节
+- Ctrl+Shift+U	显示输出面板
+- Ctrl+Shift+V	打开标记向下预览
+- Ctrl+K V	打开标记向下预览到边
+- Ctrl+K Z	Zen模式(Esc Esc退出)
+- F9	切换
+- F5	开始/继续
+- Shift+F5	停止
+- F11 / Shift+F11	步进/出
+- F10	步过
+- Ctrl+K Ctrl+I	显示悬停
+- Ctrl + ’	显示集成终端
+- Ctrl+Shift+ ’	创建新的终端
+- Ctrl + C	复制选择
+- Ctrl+V	粘贴到活动终端
+- Ctrl+↑/↓	向上/向下
+- Shift+PgUp / PgDn	滚动页面上下
+- Ctrl+Home / End	滚动到顶部/底部
