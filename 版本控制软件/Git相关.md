@@ -177,3 +177,108 @@ CONFLICT (content): Merge conflict in test.md
 % git push origin --delete 远程分支名
 
 ```
+
+## ===================
+```
+stash：存储临时代码。
+reset --soft：软回溯，回退 commit 的同时保留修改内容。
+cherry-pick：复制 commit。
+revert：撤销 commit 的修改内容。
+reflog：记录了 commit 的历史操作。
+```
+
+##==================== 封存代码修改
+```
+git stash
+
+# 保存当前未commit的代码
+git stash
+
+# 保存当前未commit的代码并添加备注
+git stash save "备注的内容"
+
+# 列出stash的所有记录
+git stash list
+
+# 删除stash的所有记录
+git stash clear
+
+# 应用最近一次的stash
+git stash apply
+
+# 应用最近一次的stash，随后删除该记录
+git stash pop
+
+# 删除最近的一次stash
+git stash drop
+
+# 列出stash
+$ git stash list
+
+# 应用
+git stash apply stash@{1}
+```
+
+
+## 恢复最近一次 commit （并且 commit 之后 的提交 保存到暂缓区）
+```
+git reset --soft HEAD^
+```
+
+## 一次转移多个提交：(上面的命令将 commit1 和 commit2 两个提交应用到**当前分支**)
+```
+git cherry-pick commit1 commit2
+
+```
+
+## 多个连续的commit，也可区间复制：
+```
+git cherry-pick commit1^..commit2
+
+```
+
+## cherry-pick 冲突时继续
+```
+git cherry-pick --continue
+```
+
+## 放弃 cherry-pick：回到操作前的样子，就像什么都没发生过
+```
+gits cherry-pick --abort
+
+```
+
+## 退出 cherry-pick：不回到操作前的样子。即保留已经 cherry-pick 成功的 commit
+```
+git cherry-pick --quit
+
+```
+
+## 撤销自己的提交
+git revert (commitHash)
+```
+git revert 21dcd937fe555f58841b17466a99118deb489212      
+```
+
+## 合并提交，撤销问题
+- 通常无法 revert 合并，因为您不知道合并的哪一侧应被视为主线。此选项指定主线的父编号（从1开始），并允许 revert 反转相对于指定父编号的更改
+- 因为合并提交是两条分支的交集节点，而 git 不知道需要撤销的哪一条分支，需要添加参数 -m 指定主线分支，保留主线分支的代码，另一条则被撤销。
+```
+#-m 后面要跟一个 parent number 标识出"主线"，一般使用 1 保留主分支代码。
+
+git revert -m 1 <commitHash>
+
+```
+
+## revert 合并提交后，再次合并分支会失效
+需要 revert 掉之前 revert 的合并提交;
+
+## 撤销 错误提交
+```
+# 历史记录：查看错误提交 commmitHash并记录
+git reflog 
+
+# revert 撤销 这条commit 
+# 
+git reset --hard commitHash
+```

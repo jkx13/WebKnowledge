@@ -116,3 +116,11 @@
 	
 ### Regex Previewer
 	功能：测试正则规则
+	
+### Window Color
+	不同项目设置不同颜色
+
+### npm-intellisense 
+导入node_mouldes 中包提示
+### path-intellisense
+导入 路径 提示
