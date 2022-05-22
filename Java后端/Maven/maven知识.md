@@ -12,27 +12,56 @@
 			/resources
 	/pom.xml (maven配置文件)
 ```
+注：配置 profile 还可以根据不同的环境（开发环境、测试环境，生产环境）读取不同的配置文件
 
 ## Mac idea中终端无法检测到mvn
 ```
-1. vim ~/.zshc再末尾加入 srouce ~/.bash_profile
+1. vim ~/.zshc再末尾加入 srouce ~/.bash_profile （macos）
+2. 配置 系统环境变量 (windows)
 ```
 
 ## Maven的POM.xml文件
 > Maven是基于项目对象模型（Project Object Model，POM）的概念,用来管理项目的依赖以及项目的编译等功能
 
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.itwanger</groupId>
+    <artifactId>MavenDemo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>MavenDemo</name>
+</project>
+
+```
+1. 第一行是XML头，指定了该xml文档的版本和编码方式
+2. project 是根元素，声明了一些POM相关的命名空间及xsd元素
+3. modelVersion指定了当前POM的版本，对于Maven 3来说，值只能是4.0.0。
+4. groupId定义了项目属于哪个组织，通常是组织域名的倒序，比如说我的域名是 xinxin.com，所以groupId就是 com.xinxin
+5. artifactId定义了项目在组织中的唯一ID。
+6. version指定了项目当前的版本，SNAPSHOT意为快照，说明该项目还处于开发中
+7. name 声明项目名称。
+注：groupId、artifactId和version这三个元素定义了一个项目的基本坐标，在Maven里任何的jar和pom都是以基于这些坐标进行区分
+
 #### dependencies元素
 ```
 是项目依赖包,使用<dependency></dependency>
 
-<dependency></dependency>内部通过groupId、artifactId、version确定唯一的依赖，可以称这3个为坐标。
+<dependency></dependency>内部通过依赖的基本坐标groupId、artifactId、version确定唯一的依赖，可以称这3个为坐标。
 
 groupId：组织的唯一标识。
 
 artifactId：项目的唯一标识。
 
 version：项目的版本。
+
+type 指定了依赖的类型，默认为 jar。
+scope 指定了依赖的范围
+optional 标记了依赖是否是可选的(针对 传递性依赖设置是否可选)
+exclusions 用来排除传递性依赖
 ```
+
 
 #### properties元素
 ```xml
@@ -92,7 +121,7 @@ Maven提供了编译插件，可在编译插件中设置Java的编译级别，�
 - 安装install：Maven特定的概念-----将打包得到的文件复制到“仓库”中的指定位置（使用install命令把被依赖的maven工程的jar包导入到本地仓库中）
 - 部署deploy：将动态Web工程生成的war包复制到Servlet容器下，使其可以运行
 
-## scope就是依赖的范围
+## 依赖范围scope详解
 - 1、compile， 默认值，适用于所有阶段（开发、测试、部署、运行），本jar会一直存在所有阶段。
 
 - 2、provided， 只在开发、测试阶段使用，目的是不让Servlet容器和你本地仓库的jar包冲突 。如servlet.jar。
@@ -102,6 +131,12 @@ Maven提供了编译插件，可在编译插件中设置Java的编译级别，�
 - 4、test， 只在测试时使用，用于编译和运行测试代码。不会随项目发布。
 
 - 5、system， 类似provided，需要显式提供包含依赖的jar，Maven不会在Repository中查找它。
+
+- compile，默认的依赖范围，表示依赖需要参与当前项目的**编译，测试、运行**周期
+- test，表示依赖仅参与测试，包括**测试代码的编译和运行**。比如: junit
+- runntime，表示依赖无需参与到项目的编译，不过后期的**测试和运行**需要,比如: jdbc驱动
+- provided，表示**不打包进去**，别的容器会提供。**编译与测试** 比如: servlet-api
+- system，从参与程度上来说，和 provided 类似**编译与测试** ，但不通过 Maven 仓库解析，可能会造成构建的不可移植，要谨慎使用。
 
 ## 生命周期
 > 1. Clean Lifecycle 在进行真正的构建之前进行一些清理工作。 Clean生命周期一共包含了三个阶段：
