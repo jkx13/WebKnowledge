@@ -58,3 +58,8 @@ target是用来存放项目构建后的文件和目录、jar包、war包、编�
 ```
 mvn clean install -Dtest -DfailIfNoTests=false  
 ```
+
+## 快速找到 接口 实现类的 快捷键
+```
+Ctrl + Alt + B
+```

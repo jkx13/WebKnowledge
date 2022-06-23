@@ -1,4 +1,5 @@
 [中央仓库](http://mvnrepository.com/)
+[Maven官网](https://maven.apache.org/index.html)
 
 ## 约定式目录结构
 ```
@@ -271,5 +272,15 @@ JavaMavenService2的log4j的版本是1.2.7版本，JavaMavenService1排除了此
 ```
 配置好build后，执行mvn package之后，在maven工程指定的target目录里war包和文件都按照配置的生成了
 
+## parent 标签的使用
+- parent标签类似java中的继承，复用依赖，减少冗余配置
+- 在多模块（module）的项目中，有很多模块中的pom中存在相同的引用，如果此时声明一个父pom文件，将公用的依赖提取到父pom文件中（即使用<parent>标签），将大大减少其他pom文件中的依赖的配置
 
-
+当 模块A，B，C 共用 同一个版本common.jar ,可以在POM.xml 中 声明如下：
+```
+ <parent>
+     <groupId>com.common</groupId>
+     <artifactId>common</artifactId>
+     <version>1.0.0</version>
+ </parent>
+```

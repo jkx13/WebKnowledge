@@ -31,3 +31,29 @@ mvn test -Dtest=Random*Test,AccountCaptchaServiceTest
 mvn test -Dtest -DfailIfNoTests=false  
 
 ```
+
+## maven-compiler-plugin
+- maven-compiler-plugin 插件来对 Java 代码编译的，如果不指定 JDK 版本，maven-compiler-plugin 会自动使用一个默认的版本；
+-  maven-compiler-plugin 默认的 JDK 版本为 1.5，此时 JDK 1.5 是不可能将带有 JDK 1.8 特性的代码编译通过的
+指定jdk 版本
+```
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+ 
+    <groupId>cn.dasheng</groupId>
+    <artifactId>springclouddemo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+ 
+    <properties>
+        <!-- maven-compiler-plugin 将会使用指定的 JDK 版本对源代码进行编译（针对编译运行环境） -->
+        <maven.compiler.source>8</maven.compiler.source>
+        <!-- maven-compiler-plugin 将会使用指定的 JDK 版本将 java 文件编译为 class 文件（针对编译运行环境）-->
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+ 
+</project>
+```

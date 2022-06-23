@@ -260,3 +260,114 @@ class methodClass {
 
 而面向过程语言大多都是直接编译成机械码在电脑上执行，并且其它一些面向过程的脚本语言性能也并不一定比Java好。
 
+## Java8中引入的一个语法糖--方法引用
+- 类名::静态方法名
+```
+str -> Integer.parseInt(str) 
+对应的方法引用：
+Integer::parseInt
+```
+- 对象::实例方法名
+```
+class A {
+  void a(String s) {
+    System.out.println(s);
+  }
+}
+
+interface B {
+  void b(String s);
+}
+
+A a = new A();
+B b = s -> a.a(s); // 等价于 B b = a::a;
+```
+- 类名::实例方法名
+```
+str -> str.toLowerCase(); // 对应方法引用写法：String::toLowerCase
+
+```
+- 类型::new（构造方法的引用）
+
+```
+len -> new int[len]
+// 简写
+ini[len]::new
+```
+示例：
+```
+String的静态方法valueOf对应的方法引用为String::valueOf
+Object的构造方法对应的方法引用为Object::new
+调用对象o的实例方法hashCode对应的方法引用为o::hashCode
+
+```
+
+### Lambda表达式
+- 创建接口的一个实现类，然后通过该类来创建实例
+```
+interface A {
+    void say(String s);
+}
+
+class AImpl implemnets A {
+    @Override
+    public void say(String s) {
+        System.out.println(s);
+    }
+}
+A a = new AImpl();
+```
+
+- 通过匿名内部类的形式
+
+```
+interface A {
+    void say(String s);
+}
+A a = new A() {
+    @Override
+    public void say(String s) {
+       System.out.println(s);
+    }
+}
+// 有相当一部分接口实际上只有一个抽象方法（default方法不是抽像方法），对于这样的接口，我们称之为函数式接口
+// 比如Comparator、Runnable等接口。
+```
+
+- jdk中的函数式接口的声明处一般都有@FunctionalInterface注解，加上这个注解的接口，如果不满足函数式接口的规范（只有一个抽象方法），编译器就会报错;
+
+- Java8引入lambda表达式来进一步简化匿名内部类的写法，因此非函数式接口是不能用lambda表达式的形式来创建接口的实例;
+
+```
+如果参数只有1个，则可以省略掉括号
+如果代码块中只有一行代码，则可以省略掉花括号和代码块结尾的分号
+如果代码块中只有一条语句，且该语句为return语句，则可以将return省略
+```
+
+- 将一个整型数字转换成对应的字符串
+```
+// 接口
+interface A {
+   String m(Integer i);
+}
+
+// 创建A的一个实例，lambda表达式写法
+A a = i -> String.valueOf(i);
+a.m(1); // 输出 "1"
+```
+- 将一个整型字符串转换成整型数字
+```
+// 接口
+interface A {
+   Integer m(String s);
+}
+
+// 创建A的一个实例，lambda表达式写法
+A a = s -> Integer.valueOf(s);
+a.m("1"); // 输出 1
+```
+- 因此对于这种代码，引入了方法引用进行简化，以上两个lambda表达式用方法引用的写法如下：
+```
+A a = String::valueOf
+B b = Integer::valueOf
+```
