@@ -284,3 +284,6 @@ JavaMavenService2的log4j的版本是1.2.7版本，JavaMavenService1排除了此
      <version>1.0.0</version>
  </parent>
 ```
+
+
+## Profiles 中配置 jdk版本

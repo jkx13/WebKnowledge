@@ -82,3 +82,27 @@ server{
 1. nginx -t //检查语法
 2. nginx -s reload //重新加载修改后的配置
 ```
+
+## $uri $request_uri
+```
+案例1：
+访问：http://127.0.0.1/test/
+$uri：/test/test.html
+$request_uri：/test/
+
+案例2：
+访问：http://127.0.0.1/
+$uri：/index.html
+$request_uri：/
+
+案例3（服务器上不存在res目录）：
+访问：http://127.0.0.1/res
+$uri：/res
+$request_uri：/res
+从上面三个案例就可以得出$uri和$request_uri所代表的值。
+```
+
+## worker_processes指明了nginx要开启的进程数
+- 据官方说法，一般开一个就够了，多开几个，可以减少机器io带来的影响。
+ - 一般为当前机器总cpu核心数的1到2倍。如，我的机器为双核，那么开4个足够了
+ - worker_processes最多开启8个，8个以上性能提升不会再提升了，而且稳定性变得更低

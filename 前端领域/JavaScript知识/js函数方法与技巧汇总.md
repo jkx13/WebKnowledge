@@ -26,6 +26,14 @@ export const isURL = (s) => {
 }
 ```
 
+## 密码复杂度校验
+```javascript
+// 密码长度在8位及以上,包含大小写字符、数字和特殊符号
+export const isPass = (s)=>{
+	return /^(?=.*\d)(?=.*[a-z])(?=.*[!_@#$%^&*.]).{8,}$/gi.test(s)
+}
+```
+
 ## 判断类型汇总
 ```javascript
 //  是否字符串
