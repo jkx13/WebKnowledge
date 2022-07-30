@@ -19,6 +19,15 @@ export const isMobile = (s) => {
   }
 ```
 
+## 手机号脱敏
+```javascript
+export const changePhone = (phone)=>{
+	let phoneReg = /(\d{3})\d*(\d{4})/
+	return phone.replace(phoneReg,'$1****$2')
+}
+
+```
+
 ## 是否url地址
 ```javascript
 export const isURL = (s) => {
@@ -198,7 +207,8 @@ export const injectScript = (src) => {
     t.parentNode.insertBefore(s, t);
 }
 ```
-28、根据url地址下载
+## 根据url地址下载
+```javascript
 
 export const download = (url) => {
     var isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
@@ -223,16 +233,18 @@ export const download = (url) => {
     window.open(url, '_self');
     return true;
 }
-29、el是否包含某个class
+```
+## el是否包含某个class
+```javascript
 
   export const hasClass = (el, className) => {
     let reg = new RegExp('(^|\\s)' + className + '(\\s|$)')
     return reg.test(el.className)
 }
-30、el添加某个class
+```
 
-另外搜索公众号GitHub猿回复关键字"猴子”获取一份惊喜礼包。
-
+## el添加某个class
+```javascript
 export const addClass = (el, className) => {
     if (hasClass(el, className)) {
         return
@@ -241,7 +253,10 @@ export const addClass = (el, className) => {
     newClass.push(className)
     el.className = newClass.join(' ')
 }
-31、el去除某个class
+```
+
+## el去除某个class
+```javascript
 
 export const removeClass = (el, className) => {
     if (!hasClass(el, className)) {
@@ -250,13 +265,17 @@ export const removeClass = (el, className) => {
     let reg = new RegExp('(^|\\s)' + className + '(\\s|$)', 'g')
     el.className = el.className.replace(reg, ' ')
 }
-32、获取滚动的坐标
+```
+## 获取滚动的坐标
+```
 
 export const getScrollPosition = (el = window) => ({
     x: el.pageXOffset !== undefined ? el.pageXOffset : el.scrollLeft,
     y: el.pageYOffset !== undefined ? el.pageYOffset : el.scrollTop
 });
-33、滚动到顶部
+```
+## 滚动到顶部
+```javascript
 
 export const scrollToTop = () => {
     const c = document.documentElement.scrollTop || document.body.scrollTop;
@@ -265,7 +284,9 @@ export const scrollToTop = () => {
         window.scrollTo(0, c - c / 8);
     }
 }
-34、el是否在视口范围内
+```
+## el是否在视口范围内
+```javascript
 
 export const elementIsVisibleInViewport = (el, partiallyVisible = false) => {
     const { top, left, bottom, right } = el.getBoundingClientRect();
@@ -275,6 +296,7 @@ export const elementIsVisibleInViewport = (el, partiallyVisible = false) => {
         ((left > 0 && left < innerWidth) || (right > 0 && right < innerWidth))
         : top >= 0 && left >= 0 && bottom <= innerHeight && right <= innerWidth;
 }
+```
 35、洗牌算法随机
 
 export const shuffle = (arr) => {

@@ -800,3 +800,18 @@ class Phone{
 	}
 }
 ```
+
+### iframe 自适应
+```
+ // setInterval(() => {
+      //       try {
+      //             const curIframe = this.iframeRef.current;
+      //             window.curIframe = curIframe;
+      //             const bodyHeight = curIframe.contentWindow.document.body.scrollHeight;
+      //             const documentHeight = curIframe.contentWindow.document.documentElement.scrollHeight;
+      //             curIframe.height = Math.min(bodyHeight, documentHeight);
+      //       } catch (e) {
+      //             // console.error(e);
+      //       }
+      // }, 200);
+```

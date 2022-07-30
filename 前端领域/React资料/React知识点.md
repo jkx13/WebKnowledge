@@ -459,6 +459,33 @@ b)箭头函数
 
 ```
 
+## React.createElement 方法
+```javascript
+// JSX 
+class Hello extends React.Component{
+	render(){
+		return <div>Hello ,{this.props.name}</div>
+	}
+}
+
+ReactDOM.render(
+	<Hello name="jk"></Hello>,
+	document.getElementById('root')
+)
+
+// 编译转化原生js
+class Hello extends React.component{
+	render(){
+		return React.createElement('div',null,`Hello,${this.props.name}`)
+	}
+}
+
+ReactDOM.render(
+	React.createElement('Hello',{name:'jk'},null),
+	document.getElmentById('root')
+)
+```
+
 ## React.cloneElement方法
 ```javascript
 

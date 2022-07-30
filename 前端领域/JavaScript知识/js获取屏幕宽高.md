@@ -70,3 +70,41 @@ let availWidth = window.screen.availWidth;
 let availHeight = window.screen.availHeight;
 
 ```
+
+## 以下三种方法能够确定浏览器窗口的尺寸（浏览器的视口，不包括工具栏和滚动条）。
+
+### 1. 对于Internet Explorer、Chrome、Firefox、Opera 、 Safari：
+```
+浏览器窗口的内部高度:
+ window.innerHeight
+ 
+ 浏览器窗口的内部宽度:
+ window.innerWidth
+```
+
+### 2.对于 Internet Explorer 8、7、6、5：
+```
+浏览器窗口的内部高度:
+document.documentElement.clientHeight
+
+浏览器窗口的内部宽度:
+document.documentElement.clientWidth
+
+       或者
+
+浏览器窗口的内部高度:
+document.body.clientHeight
+
+浏览器窗口的内部宽度:
+document.body.clientWidth
+```
+### 3. ==》实用的 JavaScript 解决方案（兼容所有浏览器）：
+
+```
+宽度：
+var w=window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+高度：
+var h=window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+```
