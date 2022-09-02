@@ -42,7 +42,7 @@ const supportsWebp = ({ createImageBitmap, Image }) => {
       image.onerror = () => {
           resolve(false);
       };
-      image.src = 'data:image/webp;base64,UklGRh4AAABXRUJQVlA4TBEAAAAvAAAAAAfQ//73v/+BiOh/AAA=';
+      image.src = 'data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA';
   });
 };
 
@@ -81,4 +81,36 @@ function check_webp_feature(feature, callback) {
     };
     img.src = "data:image/webp;base64," + kTestImages[feature];
 }
+```
+
+### 京东判断
+```javascript
+
+const supportsWebp = ({Image}) => {
+  if (!Image) return Promise.reject(false);
+
+  return new Promise((resolve,reject) => {
+      const image = new Image();
+      image.onload = () => {
+        let isOkWebp = image.width > 0 && image.height > 0;
+		if(isOkWebp){
+		   resolve(true);
+		}else{
+		   reject(false);
+		}
+      };
+      image.onerror = () => {
+          reject(false);
+      };
+      image.src = 'data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA';
+  });
+};
+
+supportsWebp(window).then(res => {
+    console.log("是支持 webp", res)
+}).catch(err => {
+    console.log(err)
+})
+
+
 ```
